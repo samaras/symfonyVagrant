@@ -25,10 +25,10 @@ Todos
 * Add installation guide and configuration guide
 ** Installation so vagrant and chef are running
 ** Configuration of VAGRANT file
-* Add phpunit for unit tests (PEAR)
 * Add Java for assetics
 * Add rubygem sass for assetics
 * Add python for build script
+* running build scripts
 
 ==================
 License and Author
