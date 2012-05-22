@@ -34,7 +34,7 @@ Todos
 License and Author
 ==================
 
-THe cookbooks used by the main cookbook can be found here: https://github.com/opscode-cookbooks/
+The cookbooks used by the main cookbook can be found here: https://github.com/opscode-cookbooks/
 
 The main cookbook was created by
 
