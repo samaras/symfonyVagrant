@@ -27,7 +27,6 @@ Todos
 ** Configuration of VAGRANT file
 * Add Java for assetics
 * Add rubygem sass for assetics
-* Add python for build script
 * running build scripts
 
 ==================
