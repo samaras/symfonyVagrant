@@ -58,6 +58,30 @@ package "php-apc" do
   notifies :reload, resources(:service => "apache2"), :delayed
 end
 
+php_pear "pear" do
+  action :upgrade
+end
+%w{pear.symfony-project.com pear.phpunit.de components.ez.no}.each do |channel|
+  php_pear_channel channel do
+    action :discover
+  end
+end
+execute "install phpunit" do
+  user "root"
+  command "pear install --alldeps phpunit/PHPUnit"
+  action :run
+  not_if "which phpunit"
+end
+package "php5-xdebug" do
+  action :install
+end
+#template "#{node["php"]["ext_conf_dir"]}/xdebug.ini" do
+#  source "xdebug.ini.erb"
+#  owner "root"
+#  group "root"
+#  mode "0644"
+#end
+
 require_recipe "mysql"
 require_recipe "mysql::server"
 
