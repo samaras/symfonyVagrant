@@ -108,3 +108,5 @@ require_recipe "python"
 gem_package "sass" do
   action :install
 end
+
+require_recipe "java"

@@ -25,7 +25,6 @@ Todos
 * Add installation guide and configuration guide
 ** Installation so vagrant and chef are running
 ** Configuration of VAGRANT file
-* Add Java for assetics
 * running build scripts
 * Adding default values (default.rb)
 
