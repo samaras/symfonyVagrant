@@ -26,8 +26,8 @@ Todos
 ** Installation so vagrant and chef are running
 ** Configuration of VAGRANT file
 * Add Java for assetics
-* Add rubygem sass for assetics
 * running build scripts
+* Adding default values (default.rb)
 
 ==================
 License and Author

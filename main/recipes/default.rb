@@ -104,3 +104,7 @@ node["database"]["users"].each do |user|
 end
 
 require_recipe "python"
+
+gem_package "sass" do
+  action :install
+end
