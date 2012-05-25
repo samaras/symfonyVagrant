@@ -13,8 +13,6 @@ r.run_action(:run)
   end
 end
 
-require_recipe "openssl"
-
 require_recipe "apache2"
 require_recipe "apache2::mod_php5"
 
