@@ -6,17 +6,18 @@ r = execute "apt-get update" do
 end
 r.run_action(:run)
 
-# Optional packages that I like to have installed
+# Install normal apt-get packages
 %w{vim man-db git-core build-essential ruby-dev php5-sqlite}.each do |pkg|
   package pkg do
     action :install
   end
 end
 
+# Apache2
 require_recipe "apache2"
 require_recipe "apache2::mod_php5"
 
-node["apache2"]["vhost"].each do |vhost|
+node["main"]["apache2"]["vhost"].each do |vhost|
   web_app vhost["name"] do
     app_name vhost["name"]
     server_name vhost["server_name"]
@@ -30,21 +31,17 @@ execute "disable-default-site" do
   notifies :reload, resources(:service => "apache2"), :delayed
 end
 
+# PHP5
 require_recipe "php"
 require_recipe "php::module_mysql"
 
-template "#{node["php"]["apache_conf_dir"]}/php.ini" do
-  source "php.ini.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-end
-
-template "#{node["php"]["conf_dir"]}/php.ini" do
-  source "php.ini.erb"
-  owner "root"
-  group "root"
-  mode "0644"
+[node["main"]["php"]["apache_conf_dir"], node["php"]["conf_dir"]].each do |dir|
+  template "#{dir}/php.ini" do
+    source "php.ini.erb"
+    owner "root"
+    group "root"
+    mode "0644"
+  end
 end
 
 package "php5-intl" do
@@ -56,6 +53,7 @@ package "php-apc" do
   notifies :reload, resources(:service => "apache2"), :delayed
 end
 
+# Pear/Pecl
 php_pear "pear" do
   action :upgrade
 end
@@ -74,26 +72,35 @@ package "php5-xdebug" do
   action :install
 end
 
+# Mysql
 require_recipe "mysql"
 require_recipe "mysql::server"
+template "/etc/mysql/my.cnf" do
+  source "my.cnf.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+end
 
 gem_package "mysql" do
   action :install
 end
 
+# Databases
 require_recipe "database"
-
 mysql_connection_info = {:host => "localhost", :username => "root", :password => node["mysql"]["server_root_password"]}
-node["database"]["databases"].each do |db|
-  mysql_database db["name"] do
+
+node["main"]["database"].each do |dbname|
+  mysql_database dbname do
     connection mysql_connection_info
     action :create
   end
 end
-node["database"]["users"].each do |user|
+node["main"]["dbuser"].each do |user|
   mysql_database_user user["name"] do
     connection mysql_connection_info
     password user["password"]
+    host user["host"]
     database_name user["database_name"]
     privileges user["privileges"]
     action :create
@@ -101,10 +108,22 @@ node["database"]["users"].each do |user|
   end
 end
 
-require_recipe "python"
-
+# Sass
 gem_package "sass" do
   action :install
 end
 
+# Python
+require_recipe "python"
+
+# Java
 require_recipe "java"
+
+# Buildscripts
+node["main"]["buildscript"].each do |buildCommand|
+  execute "buildscript" do
+    user "root"
+    command buildCommand
+    action :run
+  end
+end
