@@ -13,6 +13,8 @@ apache2
 php
 mysql
 database
+python
+java
 
 The glue which holds them together and executes everything is the main cookbook. The config from
 the vagrant file is read and put into place. It distributes it's own php.ini and apache vhost
@@ -25,8 +27,6 @@ Todos
 * Add installation guide and configuration guide
 ** Installation so vagrant and chef are running
 ** Configuration of VAGRANT file
-* running build scripts
-* Adding default values (default.rb)
 
 ==================
 License and Author
