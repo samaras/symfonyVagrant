@@ -7,7 +7,7 @@ end
 r.run_action(:run)
 
 # Install normal apt-get packages
-%w{vim man-db git-core build-essential ruby-dev php5-sqlite}.each do |pkg|
+%w{vim man-db git-core build-essential ruby-dev php5-sqlite tofrodos}.each do |pkg|
   package pkg do
     action :install
   end
