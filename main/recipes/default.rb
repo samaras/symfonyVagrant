@@ -119,6 +119,12 @@ require_recipe "python"
 # Java
 require_recipe "java"
 
+#redis.io
+if node["main"]["redis"] == true
+  require_recipe "redisio::install"
+  require_recipe "redisio::enable"
+end
+
 # Buildscripts
 node["main"]["buildscript"].each do |buildCommand|
   execute "buildscript" do

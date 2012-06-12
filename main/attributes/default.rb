@@ -12,3 +12,5 @@ default["main"]["dbuser"] = [{
   }]
 
 default["main"]["buildscript"] = []
+
+default["main"]["redis"] = true
