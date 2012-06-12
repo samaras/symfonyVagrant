@@ -7,11 +7,14 @@ end
 r.run_action(:run)
 
 # Install normal apt-get packages
-%w{vim man-db git-core build-essential ruby-dev php5-sqlite tofrodos}.each do |pkg|
+%w{vim man-db git-core ruby-dev php5-sqlite tofrodos}.each do |pkg|
   package pkg do
     action :install
   end
 end
+
+# build-essential
+require_recipe "build-essential"
 
 # Apache2
 require_recipe "apache2"
@@ -119,10 +122,22 @@ require_recipe "python"
 # Java
 require_recipe "java"
 
-#redis.io
+# redis.io
 if node["main"]["redis"] == true
   require_recipe "redisio::install"
   require_recipe "redisio::enable"
+end
+
+# node.js
+if node["main"]["coffeescript"] == true
+  require_recipe "nodejs"
+  require_recipe "nodejs::npm"
+  
+  execute "install coffeescript" do
+    command "npm install -g coffee-script"
+    action :run
+    not_if "which coffee"
+  end
 end
 
 # Buildscripts
