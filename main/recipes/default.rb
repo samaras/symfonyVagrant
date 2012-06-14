@@ -141,10 +141,12 @@ if node["main"]["coffeescript"] == true
 end
 
 # Buildscripts
-node["main"]["buildscript"].each do |buildCommand|
-  execute "buildscript" do
-    user "root"
-    command buildCommand
-    action :run
+not if File.exists?("/home/vagrant/installed")
+  node["main"]["buildscript"].each do |buildCommand|
+    execute "buildscript" do
+      user "root"
+      command buildCommand
+      action :run
+    end
   end
 end
