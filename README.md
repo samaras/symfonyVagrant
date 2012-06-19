@@ -2,23 +2,47 @@ This project contains all cookbooks and configuration needed for a clean setup o
 to use symfony2 inside the virtual machine
 
 ============================
-Sgoettschkes/sf2ChefCookbook
+Sgoettschkes/symfonyVagrant
 ============================
 
 This cookbooks aim to set up a out of the box working server to develop symfony2 applications. It 
 uses the following cookbooks authored by the guys at opscode (for more information see below):
 
-openssl
-apache2
-php
-mysql
-database
-python
-java
+* apache2
+* build-essential
+* database
+* java
+* mysql
+* nodejs
+* openssl
+* php
+* python
+* redisio
 
 The glue which holds them together and executes everything is the main cookbook. The config from
 the vagrant file is read and put into place. It distributes it's own php.ini and apache vhost
 template as needed.
+
+------------------
+Software installed
+------------------
+
+Vagrant installes a 64-bit Ubuntu Server in version 10.04 with SSL setup. It also takes care of mounting the
+shared folders. Ruby is already installed.
+
+Chef installes the following software:
+
+* apache2 (including virtualhosts file)
+* php5
+* mysql (including database setup)
+* sass (Ruby gem)
+* python (you could either uncomment this
+* java
+* redis (this can be turned of, see Vagrantfile.dist)
+* node.js & coffeescript (this can be turned of, see Vagrantfile.dist)
+
+It also executes any build script which can be defined as a command executed on command line, so you can use
+php, python, java (ant e.g.) or any other build script which can be executed through command line.
 
 =====
 Todos
@@ -40,26 +64,6 @@ Author:: Sebastian Goettschkes (<sebastian.goettschkes@boosolution.de>)
 
 Copyright 2012, boosolution Sebastian Goettschkes
 
-All cookbooks except for the main were created by
-
-Author:: Adam Jacob (<adam@opscode.com>)
-Author:: Joshua Timberman (<joshua@opscode.com>)
-Author:: AJ Christensen (<aj@opscode.com>)
-Author:: Seth Chisamore (<schisamo@opscode.com>)
-Author:: Lamont Granquist (<lamont@opscode.com>)
-
-Copyright 2009-2011, Opscode, Inc.
-
-The whole software is licenced as followed:
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+All cookbooks except for the main were created by various people from opscode or others. Please
+take care to give back something if you find this work valuable. You could for example open source your
+own code if it adds value to the vagrant or chef projects.
