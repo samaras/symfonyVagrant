@@ -1,0 +1,7 @@
+# Vagrant
+/.vagrant
+/Vagrantfile
+
+# Windows
+desktop.ini
+thumbs.db
