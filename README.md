@@ -23,9 +23,23 @@ The glue which holds them together and executes everything is the main cookbook.
 the vagrant file is read and put into place. It distributes it's own php.ini and apache vhost
 template as needed.
 
-------------------
-Software installed
-------------------
+--------------------------------
+Install and boot vagrant basebox
+--------------------------------
+
+1. Install virtualbox: http://www.virtualbox.org
+2. Install vagrant: http://www.vagrantup.com
+3. `cd /path/to/symfonyVagrant`
+4. `cp Vagrantfile.dist Vagrantfile`
+5. `vim Vagrantfile`
+6. `vagrant up`
+7. Wait (You can get a cup of coffee, this will take some time)
+
+Change the Vagrantfile according to your needs in step 5.
+
+-----------------
+Software avaiable
+-----------------
 
 Vagrant installes a 64-bit Ubuntu Server in version 10.04 with SSL setup. It also takes care of mounting the
 shared folders. Ruby is already installed.
@@ -44,13 +58,7 @@ Chef installes the following software:
 It also executes any build script which can be defined as a command executed on command line, so you can use
 php, python, java (ant e.g.) or any other build script which can be executed through command line.
 
-=====
-Todos
-=====
-
-* Add installation guide and configuration guide
-** Installation so vagrant and chef are running
-** Configuration of VAGRANT file
+You need to add the vhost server_name to your hosts file using the ip specified in the Vagrantfile.
 
 ==================
 License and Author
