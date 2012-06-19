@@ -18,7 +18,41 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = "cookbooks"
 
     chef.json = {
-      
+#      "main" => {
+#        "apache2" => {
+#          "vhost" => [{
+#            "name" => "project",
+#            "server_name" => "project.local",
+#            "docroot" => "/var/www/project/web",
+#            "dirindex" => "app.php",
+#            "template" => "vhost.conf.erb"
+#          }]
+#        },
+#        "database" => ["project"],
+#        "dbuser" => [
+#          {
+#            "name" => "root",
+#            "password" => "root",
+#            "host" => "%",
+#            "privileges" => [:all]
+#          },
+#         {
+#           "name" => "project",
+#          "password" => "project",
+#            "host" => "localhost",
+#            "database_name" => "project",
+#            "privileges" => [:all]
+#          }
+#        ],
+#        "buildscript" => [
+#          "python /var/www/project/bin/build.py"
+#        ],
+#        "redis" => true,
+#        "coffeescript" => true,
+#      },
+#      "mysql" => {
+#        "server_root_password" => "root"
+#      }
     }
 
     chef.add_recipe("main")
