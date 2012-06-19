@@ -1,9 +1,8 @@
 This project contains all cookbooks and configuration needed for a clean setup of vagrant and chef
 to use symfony2 inside the virtual machine
 
-============================
 Sgoettschkes/symfonyVagrant
-============================
+===========================
 
 This cookbooks aim to set up a out of the box working server to develop symfony2 applications. It 
 uses the following cookbooks authored by the guys at opscode (for more information see below):
@@ -23,7 +22,6 @@ The glue which holds them together and executes everything is the main cookbook.
 the vagrant file is read and put into place. It distributes it's own php.ini and apache vhost
 template as needed.
 
---------------------------------
 Install and boot vagrant basebox
 --------------------------------
 
@@ -37,7 +35,6 @@ Install and boot vagrant basebox
 
 Change the Vagrantfile according to your needs in step 5.
 
------------------
 Software avaiable
 -----------------
 
@@ -60,7 +57,6 @@ php, python, java (ant e.g.) or any other build script which can be executed thr
 
 You need to add the vhost server_name to your hosts file using the ip specified in the Vagrantfile.
 
-==================
 License and Author
 ==================
 
