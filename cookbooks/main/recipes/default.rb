@@ -149,4 +149,10 @@ if not File.exists?("/home/vagrant/installed")
       action :run
     end
   end
+  
+  execute "touch installed" do
+    user "vagrant"
+    command "touch /home/vagrant/installed"
+    action :run
+  end
 end
