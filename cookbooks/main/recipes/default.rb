@@ -13,6 +13,22 @@ r.run_action(:run)
   end
 end
 
+# bash profile
+%w{bashrc bash_profile}.each do |filename|
+  template "/home/vagrant/." + filename do
+    source filename + ".erb"
+    owner "vagrant"
+    group "vagrant"
+    mode "0644"
+  end
+end
+
+# hiding login message
+execute "touch /home/vagrant/.hushlogin" do
+  command "touch /home/vagrant/.hushlogin"
+  action :run
+end
+
 # build-essential
 require_recipe "build-essential"
 
