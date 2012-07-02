@@ -9,6 +9,8 @@ Vagrant::Config.run do |config|
   config.vm.boot_mode = :headless
 
   config.vm.network :hostonly, "192.168.3.100"
+  
+  config.vm.host_name = "vagrant"
 
   #config.vm.share_folder "project", "/var/www/project", "../project"
 
