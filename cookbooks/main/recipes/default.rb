@@ -6,6 +6,22 @@ r = execute "apt-get update" do
 end
 r.run_action(:run)
 
+template "/etc/apt/sources.list" do
+  source "sources.list.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+execute "new apt-key" do
+  command "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E5267A6C"
+  action :run
+end
+execute "apt-get update" do
+  user "root"
+  command "apt-get update"
+  action :nothing
+end
+
 # Install normal apt-get packages
 %w{vim man-db git-core ruby-dev php5-sqlite tofrodos}.each do |pkg|
   package pkg do
@@ -137,6 +153,20 @@ require_recipe "python"
 
 # Java
 require_recipe "java"
+
+# MongoDB
+require_recipe "mongodb::default" 
+template "/etc/mongodb.cnf" do
+  source "mongodb.cnf.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+execute "install php-mongodb" do
+  user "root"
+  command "pecl install -f mongo"
+  action :run
+end
 
 # redis.io
 if node["main"]["redis"] == true
