@@ -156,8 +156,8 @@ require_recipe "java"
 
 # MongoDB
 require_recipe "mongodb::default" 
-template "/etc/mongodb.cnf" do
-  source "mongodb.cnf.erb"
+template "/etc/mongodb.conf" do
+  source "mongodb.conf.erb"
   owner "root"
   group "root"
   mode "0644"
@@ -165,6 +165,11 @@ end
 execute "install php-mongodb" do
   user "root"
   command "pecl install -f mongo"
+  action :run
+end
+execute "restart mongodb" do
+  user "root"
+  command "/etc/init.d/mongodb restart"
   action :run
 end
 
