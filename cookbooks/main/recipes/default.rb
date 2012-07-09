@@ -19,7 +19,7 @@ end
 execute "apt-get update" do
   user "root"
   command "apt-get update"
-  action :nothing
+  action :run
 end
 
 # Install normal apt-get packages
