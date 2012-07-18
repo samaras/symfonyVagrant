@@ -63,7 +63,7 @@ node["main"]["apache2"]["vhost"].each do |vhost|
 end
 execute "disable-default-site" do
   command "sudo a2dissite default"
-  notifies :reload, resources(:service => "apache2"), :delayed
+  notifies :restart, resources(:service => "apache2"), :delayed
 end
 
 # PHP5
@@ -81,11 +81,11 @@ end
 
 package "php5-intl" do
   action :install
-  notifies :reload, resources(:service => "apache2"), :delayed
+  notifies :restart, resources(:service => "apache2"), :delayed
 end
 package "php-apc" do
   action :install
-  notifies :reload, resources(:service => "apache2"), :delayed
+  notifies :restart, resources(:service => "apache2"), :delayed
 end
 
 # Pear/Pecl
